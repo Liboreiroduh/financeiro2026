@@ -1,0 +1,69 @@
+:root {
+  /* --- GLOBAL DESIGN SYSTEM: DARK + FURTACOR --- */
+
+  /* 1. STRUCTURAL DARK PALETTE */
+  --md-sys-color-background: #0B0B0F;
+  /* Deep Space Black */
+  --md-sys-color-surface: #15151C;
+  /* Component Surface */
+  --md-sys-color-surface-variant: #1C1C25;
+  /* Hover / Elev 1 */
+  --md-sys-color-surface-container: #23232D;
+  /* Elev 2 */
+
+  /* 2. TYPOGRAPHY PALETTE (Accessibility) */
+  --md-sys-color-on-background: #FFFFFF;
+  /* Primary Text */
+  --md-sys-color-on-surface: #FFFFFF;
+  --md-sys-color-on-surface-variant: #A0A0B5;
+  /* Secondary Text */
+  --md-sys-color-on-disabled: #5E5E6B;
+  /* Disabled Text */
+
+  /* 3. FURTACOR SYSTEM (Iridescent Controls) */
+  /* Gradient: Cool Purple -> Petrol Blue -> Cyan Green */
+  --gradient-furtacor: linear-gradient(135deg, #6C63FF 0%, #3FA9F5 50%, #2EE6A6 100%);
+  --gradient-furtacor-soft: linear-gradient(135deg, rgba(108, 99, 255, 0.2) 0%, rgba(63, 169, 245, 0.2) 50%, rgba(46, 230, 166, 0.2) 100%);
+
+  /* Solid accents (used by text/icons) */
+  --md-sys-color-primary: #6C63FF;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: rgba(108, 99, 255, 0.16);
+  --md-sys-color-on-primary-container: #EAE8FF;
+
+  --md-sys-color-tertiary: #2EE6A6;
+  --md-sys-color-on-tertiary: #07120E;
+  --md-sys-color-tertiary-container: rgba(46, 230, 166, 0.14);
+  --md-sys-color-on-tertiary-container: #D7FFF2;
+
+  /* Functional Functional Colors */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  /* 1px structural borders */
+  --color-border-active: rgba(63, 169, 245, 0.5);
+  /* Active state hint */
+
+  --md-sys-color-error: #FF5252;
+  --md-sys-color-success: #2EE6A6;
+  /* Matches iridescent green */
+
+  /* 4. SHAPES & SPECS */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  /* Buttons / Cards */
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --header-height: 64px;
+
+  /* 5. EFFECTS */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(63, 169, 245, 0.15);
+  /* Subtle iridescent glow */
+
+  /* Typography Scale (Roboto) */
+  --font-display: 700 42px/1.1 'Roboto', sans-serif;
+  --font-headline: 600 22px/1.3 'Roboto', sans-serif;
+  --font-title: 600 16px/1.5 'Roboto', sans-serif;
+  --font-body: 400 15px/1.6 'Roboto', sans-serif;
+  --font-label: 500 13px/1.5 'Roboto', sans-serif;
+}

@@ -1,0 +1,615 @@
+Arquitetura Conceitual – Aplicativo de Controle
+Financeiro Manual
+1. Visão Geral do Produto
+Proposta de valor
+O aplicativo propõe-se a ser um assistente financeiro pessoal totalmente manual, permitindo que o
+usuário registre entradas e saídas de forma rápida e intuitiva, controle cartões e contas, defina categorias e
+orçamentos e obtenha visões mensais e comparativas. Ele é local‑first: os dados ficam no dispositivo e não
+exigem conexão constante. Esse modelo fornece controle total ao usuário e evita dependência de
+integrações bancárias. Aplicativos modernos de finanças defendem que ferramentas de finanças devem ser
+rápidas e colocam o usuário no comando; esse tipo de enfoque garante que a pessoa aprenda e tome as
+decisões em vez de apenas seguir automações. 
+Problema resolvido
+1
+Muitos usuários tentam controlar suas finanças em cadernos ou planilhas, mas desistem por ser
+demorado, impreciso e sem insights . Por outro lado, boa parte dos apps existentes dependem de
+integração bancária e invasão de privacidade. O aplicativo manual visa resolver a lacuna entre planilhas e
+apps complexos: oferece registros simples, categorização, orçamentos e visualizações sem exigir conta
+bancária ou login obrigatório. A falta de ferramentas com uso rápido, cotidiano e humanizado prejudica o
+hábito de registrar gastos; este projeto visa tornar o registro tão simples quanto usar um caderno, mas
+com os benefícios de uma interface moderna.
+Perfil do usuário
+• 
+• 
+• 
+• 
+Pessoas físicas, individuais ou famílias, que desejam melhorar o controle financeiro pessoal. 
+Usuários sem conhecimento técnico que valorizam simplicidade e segurança; muitos aplicativos de
+orçamento são abandonados porque são confusos . 
+Quem precisa de registro offline (por exemplo, trabalhadores que se deslocam ou pessoas
+preocupadas com privacidade). 
+1
+Moradores do Brasil que usam reais, mas o app terá suporte a múltiplas moedas para viagens.
+Filosofia do produto
+• 
+• 
+• 
+Mobile-first: nasce para uso em smartphones. O design prioriza o uso com uma mão, com
+elementos posicionados no terço inferior da tela para fácil alcance . 
+Local-first e privacidade: os dados ficam no dispositivo; nenhuma informação é enviada a
+servidores sem permissão. 
+2
+Controle do usuário: o app não impõe decisões. Ele fornece ferramentas rápidas e educa o usuário,
+mas a pessoa está no comando. 
+1
+• 
+• 
+• 
+Clareza e simplicidade: navegação clara, sem telas confusas, com linguagem humana e acessível. 
+Adaptável: permite personalizar categorias, contas e cartões. 
+Sem cópia de soluções como GuiaBolso; a identidade visual, textos e fluxos são originais.
+2. Princípios de UX e Design (Mobile‑First)
+1. 
+2. 
+3. 
+Navegação com uma mão – A maior parte dos usuários usa o telefone com uma única mão . As
+ações primárias devem estar no terço inferior da tela, facilitando o alcance do polegar . Um
+mapa de “zonas do polegar” define três áreas: zona fácil (inferior), zona de extensão (meio) e zona
+difícil (topo)
+5
+6
+4
+3
+. Botões de salvar, adicionar e navegar entre seções devem permanecer na zona fácil.
+Hierarquia visual – O design mobile‑first exige priorizar o conteúdo essencial e utilizar hierarquia
+clara para guiar o olhar do usuário. Elementos importantes aparecem primeiro (no topo do scroll) e
+recebem mais espaço; secundários aparecem depois ou são acessados via expansão. 
+Tamanhos de toque generosos – Apple recomenda alvos de toque de pelo menos 44x44 pt e
+Google 48 dp . Para facilitar o uso de uma mão, o app utilizará botões entre 48 × 48 pt e
+56 × 56 dp
+7
+4. 
+8
+. Haverá ao menos 8–12 px de espaço entre elementos interativos . 
+Espaçamento e alinhamento – Um sistema de espaçamento baseado em múltiplos de 8 px
+garante consistência
+9
+5. 
+6. 
+7. 
+10
+11
+. Pequenos espaçamentos (8 px) para ícones e textos, médios (16 px) entre
+seções relacionadas e grandes (24–32 px) para separar seções distintas . Margens laterais de 16
+20 px evitam sensação de aperto . 
+Prioridade de ações – Ações frequentes, como adicionar transação, ficam acessíveis por botão
+f
+lutuante ou na barra inferior de navegação; ações menos usadas (configurações) ficam no topo ou
+em menus. Este posicionamento aumenta a taxa de conclusão de tarefas . 
+Feedback visual e microinterações – microinterações (animações discretas, vibrações) reforçam a
+conclusão de ações e aumentam a confiança . Erros devem ser comunicados com linguagem
+simples e oferecer opções de recuperação . 
+Clareza e ausência de poluição – O mobile‑first prioriza conteúdo conciso e uso de espaço em
+branco. Textos curtos e alinhamento limpo tornam a interface amigável; listas e seções são
+agrupadas para facilitar varredura visual .
+13
+14
+15
+3. Arquitetura de Informação (Visões / Telas)
+Estrutura de navegação
+• 
+• 
+12
+Barra inferior com 4–5 ícones: Home, Registrar, Visão mensal, Contas/Cartões e Mais (categorias/
+configurações). A barra está sempre visível e no alcance do polegar . 
+Botão flutuante (+): presente nas telas principais para adicionar rapidamente entrada, saída ou
+recorrência. 
+12
+• 
+Menu “Mais”: contém itens menos frequentes (categorias, cartões, recorrências, configurações).
+Home / Uso rápido
+• 
+• 
+• 
+• 
+• 
+Objetivo: painel inicial com resumo do mês atual, saldo consolidado e atalhos para adicionar
+transações. 
+Elementos visuais: 
+Cabeçalho com mês/ano e seletores para mudar de mês (setas esquerda/direita). 
+Cartões/saldo: mostram total de receitas e despesas do mês e saldo líquido. 
+Lista ou gráfico de categorias mais gastas (top 3). 
+2
+• 
+• 
+• 
+• 
+Atalho “Adicionar” (botão) para registrar rapidamente uma transação. 
+Ações principais: adicionar gasto ou receita, mudar de mês, acessar detalhes de uma categoria. 
+Ordem visual: resumo no topo, gráfico ou lista de categorias, lista de últimas transações, botão
+f
+lutuante. 
+Comportamento mobile: deslizar lateralmente troca de mês; tocar em um cartão expande detalhes;
+usar scroll para ver mais transações.
+Registro de saída (despesa)
+• 
+• 
+• 
+• 
+• 
+Objetivo: registrar rapidamente um gasto. 
+Elementos: campos para valor, data (predefinida para o dia atual), categoria, conta ou cartão,
+descrição opcional, recorrência (alternativa), sinalizador de “parcelado” para compras parceladas. 
+Ações: salvar, cancelar, selecionar ou criar nova categoria/conta/cartão, marcar como recorrente. 
+Ordem visual: valor em destaque; abaixo, escolha de categoria; campo de data e conta; opção de
+marcar recorrência; botão “Salvar” na barra inferior. 
+Comportamento: após salvar, feedback com microinteração (animação ou vibração) e retorno à
+lista de transações. Botões grandes e espaçados garantem conforto .
+Registro de entrada (receita)
+13
+6
+Similar ao registro de saída, porém com ícone ou cor diferente. Inclui campos: valor, data, categoria (ex.:
+salário, reembolso), conta de destino, descrição. Permite registrar receita recorrente (ex.: salário mensal).
+Panorama mensal
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+Objetivo: fornecer visão completa do mês selecionado. 
+Elementos: 
+Gráfico de pizza com distribuição de despesas por categoria. 
+Gráfico de barras comparando receitas e despesas semanais ou categorias. 
+Indicadores de orçamento: mostra limites por categoria e percentual utilizado. 
+Lista de transações do mês, com filtros por tipo, categoria, conta ou cartão. 
+Totais de entradas, saídas e saldo no mês. 
+Ações: filtrar por conta ou categoria, navegar entre meses, exportar relatório (em formato CSV
+futuramente), ajustar orçamentos. 
+Comportamento: rolagem vertical; os gráficos ocupam o topo; as listas e filtros seguem abaixo. Ao
+tocar em um segmento do gráfico, filtra-se a lista de transações daquela categoria.
+Categorias
+• 
+• 
+• 
+• 
+• 
+Objetivo: gerenciar categorias e subcategorias de transações. 
+Elementos: lista de categorias existentes com cores/ícones; botão “Nova categoria”. 
+Ações: adicionar, editar (nome, cor, ícone, tipo de transação – receita ou despesa), excluir (apenas se
+não houver transações ou ao mover transações para outra categoria). 
+Ordem visual: categorias agrupadas por tipo; botão “Adicionar” flutuante. 
+Comportamento: tocar em uma categoria exibe suas subcategorias; deslizar para a esquerda
+permite editar ou excluir.
+3
+Contas
+• 
+• 
+• 
+• 
+• 
+Objetivo: listar contas de dinheiro (carteira, conta-corrente, poupança) e acompanhar saldos. 
+Elementos: cada conta mostrada como cartão com nome, saldo, cor; opção de adicionar nova conta.
+Ações: adicionar, editar (nome, saldo inicial, cor, tipo – dinheiro, banco), excluir (somente se saldo
+zero e sem transações atreladas), transferir fundos entre contas. 
+Ordem visual: saldos totais no topo; lista de contas abaixo; botão “Adicionar” no fundo. 
+Comportamento: ao tocar em uma conta, abre detalhamento com histórico e gráficos de saldo ao
+longo do mês.
+Cartões
+• 
+• 
+• 
+• 
+• 
+Objetivo: controlar cartões de crédito sem integrar bancos. 
+Elementos: lista de cartões com limite, valor utilizado, valor da fatura corrente e próxima data de
+fechamento/vencimento. 
+Ações: adicionar cartão (nome, bandeira, limite, dia de fechamento, dia de vencimento), editar
+dados, arquivar (desativar), registrar pagamento de fatura. 
+Ordem visual: cartões ordenados pelo dia de vencimento; indicador de limite utilizado; botão
+“Adicionar”. 
+Comportamento: ao tocar em um cartão, mostra transações associadas (gastos no cartão) por
+fatura e permite acompanhar parcelas futuras.
+Recorrências
+• 
+• 
+• 
+• 
+• 
+Objetivo: gerenciar transações repetitivas (assinaturas, salários, contas fixas). 
+Elementos: lista de recorrências com nome, valor, periodicidade (diária, semanal, mensal, anual),
+próxima execução. 
+Ações: adicionar nova recorrência (definindo valor, tipo de transação, categoria, conta ou cartão,
+data inicial, periodicidade), editar, pausar ou cancelar. 
+Ordem visual: agrupadas por periodicidade; botão “Adicionar”. 
+Comportamento: o app gera automaticamente transações futuras nas datas programadas,
+solicitando confirmação quando necessário. 
+Configurações
+• 
+• 
+• 
+• 
+Objetivo: ajustar preferências do usuário. 
+Elementos: opções de moeda, idioma, tema (claro/escuro), formato de data, exportação de dados,
+segurança (senha ou biometria), limpeza de dados. 
+Ações: alterar tema, definir senha de acesso, exportar/ importar CSV (para futuro), resetar dados. 
+Comportamento: itens listados verticalmente; confirmação para ações destrutivas; informações
+explicativas para cada opção.
+4. Fluxos do Usuário
+Registro de gasto em até 3 passos
+1. 
+Acessar registro: a partir do botão “+” ou ícone de gasto. 
+4
+2. 
+3. 
+Preencher dados essenciais: informar o valor e escolher a categoria; o campo de data preenche
+automaticamente com hoje, podendo ser alterado; selecione a conta ou cartão (por padrão, última
+usada) e opcionalmente adicione descrição. 
+Salvar: tocar em “Salvar” para registrar; o app exibe feedback visual e retorna ao fluxo anterior. Em
+caso de parcelamento, define-se número de parcelas e o app cria parcelas futuras ligadas à fatura do
+cartão correspondente.
+Registro de entrada
+Semelhante ao fluxo de gasto: abrir tela de entrada, informar valor, categoria (salário, reembolso), data e
+conta de destino; salvar. Recorrências de entrada (ex.: salário mensal) podem ser configuradas na mesma
+tela marcando a opção de recorrente e definindo periodicidade.
+Navegação entre meses
+No topo da Home e da Visão Mensal existem setas ou gesto de deslizar que permitem avançar ou
+retroceder entre meses. Ao mudar de mês, todos os componentes (saldos, gráficos, listas) são atualizados.
+Navegando para um mês futuro, o app exibe previsões de recorrências e parcelas futuras.
+Criação e edição de categorias
+1. 
+2. 
+3. 
+4. 
+Acessar a tela “Categorias” pelo menu “Mais” ou atalho. 
+Tocar em “Nova categoria”. 
+Definir nome, tipo (receita ou despesa), cor e ícone. Para subcategorias, escolher a categoria pai. 
+Salvar. Para editar, deslize sobre a categoria na lista e escolha “Editar” ou “Excluir”.
+Criação e edição de cartões
+1. 
+2. 
+3. 
+4. 
+5. 
+Acessar “Cartões” pelo menu inferior. 
+Selecionar “Adicionar cartão”. 
+Informar nome, bandeira (opcional), limite total, dia de fechamento e dia de vencimento, cor
+personalizada. 
+Salvar. 
+Para editar, tocar em um cartão e escolher “Editar”; para arquivar, usar opção “Arquivar” (não apaga
+dados passados). Pagamentos de fatura são registrados manualmente como transação de saída
+vinculada ao cartão.
+Visualização do controle mensal
+1. 
+2. 
+3. 
+4. 
+5. 
+Abrir a tela “Visão Mensal” ou tocar no mês na home. 
+Visualizar gráficos de distribuição e comparativos; abaixo estão as listas de transações. 
+Aplicar filtros (botão de filtro) para ver apenas uma conta, cartão ou categoria. 
+Ajustar orçamento de categorias diretamente pelo gráfico ou via botão “Editar Orçamentos”. 
+Alternar meses usando setas ou deslizar. 
+5
+5. Modelo Conceitual de Dados (Sem Código)
+Entidades e atributos
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+Transação
+ID: identificador único. 
+Tipo: entrada ou saída. 
+Valor: montante da transação. 
+Data: data e hora do registro. 
+CategoriaID: referência à categoria. 
+ContaID: referência à conta onde o valor será lançado (pode ser nula quando for um cartão). 
+CartãoID: referência ao cartão de crédito (opcional). 
+RecorrênciaID: referência ao agendamento (opcional). 
+Descrição: texto livre. 
+Parcelas: número de parcelas (quando parcelado). 
+ParcelaAtual: índice da parcela. 
+Liquidação: status (pendente, liquidado). 
+Conta
+ID: identificador. 
+Nome: nome personalizado (carteira, banco, poupança). 
+Tipo: tipo (dinheiro físico, conta bancária, poupança, investimento simples). 
+SaldoInicial: valor inicial ao criar conta. 
+Moeda: código da moeda (BRL, USD, etc.). 
+Cor: cor para identificação visual. 
+Cartão
+ID: identificador. 
+Nome: nome do cartão. 
+Limite: limite de crédito total. 
+LimiteDisponível: limite ainda livre (calculado com base nas transações não pagas). 
+DiaFechamento: dia do mês em que a fatura é fechada. 
+DiaVencimento: dia do mês em que a fatura vence. 
+BancoEmissor: instituição emissora (opcional). 
+Cor: cor identificadora. 
+Ativo: flag de arquivamento. 
+Categoria
+ID: identificador. 
+Nome: nome da categoria. 
+Tipo: receita ou despesa. 
+Cor: cor associada para gráficos. 
+6
+Ícone: referência ao ícone. 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+CategoriaPaiID: referência à categoria pai (para subcategorias). 
+Recorrência
+ID: identificador. 
+Nome: descrição da recorrência. 
+Tipo: entrada ou saída. 
+Valor: montante. 
+CategoriaID: categoria associada. 
+ContaID ou CartãoID: onde será lançada. 
+Periodicidade: diária, semanal, mensal, anual, personalizada. 
+DataInicial: data da primeira ocorrência. 
+DataPróxima: próxima data agendada. 
+FimRecorrência: data final (opcional). 
+Configurações
+ID: identificador único (único registro). 
+Idioma: idioma preferido. 
+MoedaPadrão: moeda padrão para exibição. 
+Tema: claro ou escuro. 
+FormatoData: dd/mm/aaaa ou outra. 
+SenhaAtivada: indica se há proteção por PIN ou biometria. 
+PrimeiroDiaSemana: para calendário. 
+Integração: flags para recursos futuros (importação, sync). 
+Relacionamentos conceituais
+• 
+• 
+• 
+• 
+• 
+• 
+Conta 1–N Transação: uma conta possui várias transações; cada transação pertence a uma conta
+(exceto quando associada a cartão). 
+Cartão 1–N Transação: um cartão pode ter várias transações de crédito; cada transação de cartão
+pertence a apenas um cartão. 
+Categoria 1–N Transação: cada transação pertence a uma categoria; categorias podem ter
+subcategorias (relacionamento hierárquico). 
+Recorrência 1–N Transação: uma recorrência gera várias transações ao longo do tempo; as
+transações mantêm referência para rastreabilidade. 
+Conta 1–N Recorrência e Cartão 1–N Recorrência: a recorrência define a conta ou cartão de
+origem. 
+Categoria 1–N Recorrência: cada recorrência tem uma categoria. 
+6. Regras de Negócio
+Entradas versus saídas
+• 
+Entradas (receitas) aumentam o saldo de uma conta. São registradas com valor positivo. 
+7
+• 
+• 
+Saídas (despesas) diminuem o saldo de uma conta ou aumentam o saldo utilizado do cartão de
+crédito. São registradas com valor negativo. 
+Uma transação não pode ser classificada simultaneamente como entrada e saída.
+Cartão de crédito vs débito
+• 
+• 
+• 
+Cartão de crédito: os gastos são registrados como transações vinculadas ao cartão. Eles não
+reduzem o saldo das contas imediatamente; diminuem o limite disponível do cartão. Ao pagar a
+fatura, registra‑se uma transação de saída (pagamento) a partir da conta de débito para o cartão,
+quitando a fatura. 
+Cartão de débito / conta: as saídas debitam imediatamente o saldo da conta. 
+O usuário pode transferir valores entre contas (transação de transferência) sem alterar o valor total. 
+Fechamento de fatura
+• 
+• 
+• 
+• 
+Cada cartão tem DiaFechamento e DiaVencimento. 
+No dia de fechamento, o app calcula o valor da fatura somando todas as transações realizadas entre
+o último fechamento e o atual; transações de meses anteriores que ainda não foram pagas também
+são incluídas. 
+O valor da fatura aparece na tela de Cartões e na Visão Mensal; o usuário pode registrar o
+pagamento a qualquer momento antes do vencimento. 
+Parcelas de compras são distribuídas em faturas futuras automaticamente. 
+Gastos recorrentes
+• 
+• 
+• 
+Ao criar uma recorrência, o usuário define periodicidade e data inicial. O app gera transações futuras
+com base nesse padrão. 
+O usuário pode optar por confirmar antes de registrar (para validar valores variáveis) ou registrar
+automaticamente. 
+Editar uma recorrência atualiza transações futuras ainda não confirmadas. 
+Edição e exclusão de dados
+• 
+• 
+Edição: alterar uma transação ajusta o saldo da conta ou limite do cartão em tempo real. Se a
+transação for parte de uma recorrência ou parcela, o app pergunta se a alteração deve se aplicar
+apenas à transação selecionada ou a todas as futuras. 
+Exclusão: excluir transações remove o impacto no saldo ou limite. Transações provenientes de
+recorrências podem ser excluídas individualmente; excluir a recorrência remove apenas transações
+futuras ainda não confirmadas. 
+Cálculos mensais
+• 
+• 
+• 
+• 
+• 
+Saldo mensal por conta: saldo inicial da conta + entradas – saídas no mês. 
+Total de receitas/despesas: soma dos valores classificados como entrada/saída no mês. 
+Orçamento por categoria: cada categoria pode ter um limite. A tela de Panorama Mensal mostra
+percentual utilizado e alerta ao atingir 80 % e 100 %. 
+Saldo de cartão de crédito: limite – somatório das transações não pagas até a data de fechamento. 
+Comparativos: variação percentual entre o mês atual e o anterior para cada categoria.
+8
+7. Visualização e Insights
+O aplicativo não se limita a registrar dados; ele oferece insights práticos para educar o usuário sobre sua
+saúde financeira, inspirando-se em práticas de apps financeiros modernos que recomendam mostrar
+resumos de patrimônio líquido, metas de poupança e resumos de gastos mensais .
+16
+Tipos de gráfico
+• 
+• 
+• 
+Gráfico de pizza: exibe a porcentagem de despesas por categoria. 
+Gráfico de barras/colunas: compara receitas e despesas ao longo das semanas do mês ou compara
+categorias entre meses. 
+Gráfico de linha: mostra evolução do saldo da conta ao longo do tempo. 
+Rankings e comparações
+• 
+• 
+• 
+• 
+Categorias que mais consomem orçamento: lista das 5 maiores despesas. 
+Top receitas: categorias de maiores entradas. 
+Comparações mensais: diferencia valores de um mês em relação ao anterior, exibindo alta ou
+queda percentuais. 
+Ranking de cartões: cartões com maior valor de fatura e quanto cada categoria influencia o limite.
+Alertas simples
+• 
+• 
+• 
+17
+Avisos de orçamento: quando uma categoria atinge 80 % do limite, o app exibe mensagem com
+sugestão de ajuste . 
+Lembretes de vencimento de faturas: notifica alguns dias antes do vencimento. 
+Recibos ou transações recorrentes: alerta antes de lançamentos automáticos para confirmar
+valores variáveis. 
+• 
+16
+Sugestões de economia: baseado em tendências (por exemplo, “você gastou 15 % mais em
+alimentação esta semana; deseja definir um limite?”) inspiradas nas práticas de educação financeira
+.
+8. Evolução Futura (Não implementar agora)
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+Importação CSV: permitir importar extratos bancários ou de outros apps para agilizar registros. 
+Integração Open Finance: opcionalmente conectar contas e cartões via API regulada para
+sincronizar transações; seguirá autorização do usuário. 
+Multiusuário: possibilitar perfis familiares ou compartilhamento de contas específicas. 
+Backup/Sincronização em nuvem: permitir armazenar dados na nuvem com criptografia,
+mantendo a filosofia local‑first com sincronização opcional. 
+Monetização: modelos como assinaturas (sem anúncios), módulos de consultoria financeira,
+exportação de relatórios avançados. 
+Inteligência artificial: análises preditivas de fluxo de caixa, sugestões personalizadas de
+orçamento, categorização automática. 
+Metas e investimentos: criação de metas de poupança, acompanhamento de investimentos
+simples (sem atuar como corretora). 
+9
+9. Restrições e Decisões Conscientes
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+Sem integração bancária nesta fase: o aplicativo é 100 % manual, sem uso de Open Finance ou
+scraping de contas. Essa decisão preserva a privacidade do usuário e simplifica o modelo. 
+Sem login obrigatório: não exige criação de conta; opcionalmente, o usuário pode configurar senha
+ou biometria local. 
+Sem ERP ou funcionalidades corporativas: o foco é uso pessoal, não servindo para gestão de
+empresas ou controle contábil avançado. 
+Sem investimentos complexos: não inclui ações, fundos ou derivativos. Pode ser expandido
+futuramente. 
+Sem automações invasivas: o app não impõe recomendações agressivas; ele educa com insights
+leves. 
+5
+Sem dependência de internet: funciona offline; dados são sincronizados apenas quando o usuário
+optar (futura funcionalidade). 
+Decisões guiadas por boas práticas: a interface respeita princípios de navegação com uma mão
+, utiliza espaçamento consistente
+18
+9
+ e prioriza acessibilidade (alto contraste, fontes legíveis)
+. 
+Foco em privacidade: inspirado em ferramentas local‑first que colocam o usuário no controle e
+enfatizam que “você é quem decide”.
+Observação: Este documento apresenta uma visão conceitual completa para servir como referência a
+desenvolvedores, designers e stakeholders. Ele descreve estruturas, fluxos, modelos de dados e regras de
+negócio sem incluir código-fonte. A implementação deve seguir princípios de design mobile‑first e respeitar
+as restrições aqui descritas.
+1
+17
+Top 5 Budgeting Apps for Personal Finance & Expense Tracking
+https://www.sevensquaretech.com/top-5-budgeting-apps-personal-finanace-expense-tracking/
+2
+3
+4
+5
+7
+12
+How Should I Design My App for One-Handed Use?
+https://thisisglance.com/learning-centre/how-should-i-design-my-app-for-one-handed-use
+6
+8
+9
+10
+11
+15
+What Spacing Rules Create Better Mobile App Layouts?
+https://thisisglance.com/learning-centre/what-spacing-rules-create-better-mobile-app-layouts
+13
+18
+UX em apps financeiros: 7 Boas Práticas para encantar e reter Usuários
+https://pt.linkedin.com/pulse/ux-em-apps-financeiros-7-boas-pr%C3%A1ticas-para-encantar-e-reter-w0tof
+14
+16
+10 Best Fintech UX Practices for Mobile Apps in 2025
+https://procreator.design/blog/best-fintech-ux-practices-for-mobile-apps
